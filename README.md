@@ -48,6 +48,8 @@ $ docker-compose build
 ```
 $ docker-compose up -d
 ```
+구동 후 grafana 플러그인을 다운로드 받는 과정이 있어서 시간이 걸립니다.
+바로 접속하지 말고 1~2분 정도 기다려야 정상적으로 구동 됩니다.
 
 ## 접속
 
