@@ -11,29 +11,39 @@ InfluxDB 는 HTTP 기반의 REST API를 제공하기 때문에 쉽게 지표를 
 Grafana 는 시각화 도구입니다. 
 쌓여있는 데이터를 효과적으로 시각화 할 수 있도록 해주는 프로그램으로서 모니터링을 위한 대시보드를 만드는 데 많이 사용되고 있습니다.
 
+## nmon2influxdb
+nmon 의 결과 파일을 influxDB 로 임포트 할 수 있습니다.
+nmon 결과파일로 부터 grafana 대시보드를 자동으로 만들고
+관련문서는 여기 [https://nmon2influxdb.org/] 를 참고하세요
+
+## History
+* 2018-05-25 v1.5 - nmon2influxdb 추가
+* 2018-05-10 v1.0 - Grafana with InfluxDB Using docker-compose
+
 
 # Requirement
 - Ubuntu 16.04 에서 테스트 되었습니다.
 - 시스템에 docker 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/install/linux/docker-ce/ubuntu/] 를 참고하세요.
 - docker-compose 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/compose/install/#install-compose] 를 참고하세요.
+- nmon2influxdb를 사용하기 위해서는 nmon 이 설치되어 있어야 합니다. 
 
 
 # Install and Run
 
 ## 소스코드 다운로드
 ```
-git clone https://github.com/chaeya/DockerGrafanaInfluxKit.git
+$ git clone https://github.com/chaeya/DockerGrafanaInfluxKit.git
 ```
 
 ## 빌드
 ```
-cd DockerGrafanaInfluxKit
-docker-compose build
+$ cd DockerGrafanaInfluxKit
+$ docker-compose build
 ```
 
 ## 서비스 구동
 ```
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 ## 접속
@@ -41,5 +51,20 @@ docker-compose up -d
 http:<설치한 서버 IP>:3000 으로 접속한 후 admin/admin 으로 로그인 합니다.
 
 
+# nmon 모니터링
+nmon 으로 리눅스 시스템 모니터링 데이터를 수집해서 grafana 대시보드로 보기 위해서, 매일 10초 간격으로 nmon 이 모니터링 데이터를 수집할 수 있도록 crontab 에 다음과 같이 설정해 줍니다.
+```
+MAILTO="hckim@invesume.com"
+0 0 * * * /usr/bin/killall nmon && /usr/local/bin/nmon2influxdb import <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/rm -f <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/nmon -f -m <nmon 결과값을 저장할 경로> -s 10 -c 43195
+```
+
 ## Link to the related article: 
 https://www.blazemeter.com/blog/how-to-create-a-lightweight-performance-monitoring-solution-with-docker-grafana-and-influxdb
+
+## 데이터 보관
+docker 를 재구동해도 데이터가 로컬 서버에 남아 있도록 분석한 데이터는 서버에 보관됩니다.
+데이터가 저장되는 경로는 서버에서 아래의 명령어를 실행하면 알 수 있습니다.
+```
+$ docker volume inspect dockergrafanainfluxkit_grafana_data | grep Mountpoint
+$ docker volume inspect dockergrafanainfluxkit_influxdb_data  | grep Mountpoint
+```
