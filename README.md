@@ -13,8 +13,7 @@ Grafana 는 시각화 도구입니다.
 
 ## nmon2influxdb
 nmon 의 결과 파일을 influxDB 로 임포트 할 수 있습니다.
-nmon 결과파일로 부터 grafana 대시보드를 자동으로 만들고
-관련문서는 여기 [https://nmon2influxdb.org/] 를 참고하세요
+관련문서는 [https://nmon2influxdb.org/] 를 참고하세요
 
 ## History
 * 2018-05-25 v1.5 - nmon2influxdb 추가
@@ -27,6 +26,10 @@ nmon 결과파일로 부터 grafana 대시보드를 자동으로 만들고
 - docker-compose 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/compose/install/#install-compose] 를 참고하세요.
 - nmon2influxdb를 사용하기 위해서는 nmon 이 설치되어 있어야 합니다. 
 
+
+# Demo
+[http://geecamp.com:3000]
+admin / admin
 
 # Install and Run
 
@@ -50,17 +53,6 @@ $ docker-compose up -d
 
 http:<설치한 서버 IP>:3000 으로 접속한 후 admin/admin 으로 로그인 합니다.
 
-
-# nmon 모니터링
-nmon 으로 리눅스 시스템 모니터링 데이터를 수집해서 grafana 대시보드로 보기 위해서, 매일 10초 간격으로 nmon 이 모니터링 데이터를 수집할 수 있도록 crontab 에 다음과 같이 설정해 줍니다.
-```
-MAILTO="hckim@invesume.com"
-0 0 * * * /usr/bin/killall nmon && /usr/local/bin/nmon2influxdb import <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/rm -f <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/nmon -f -m <nmon 결과값을 저장할 경로> -s 10 -c 43195
-```
-
-## Link to the related article: 
-https://www.blazemeter.com/blog/how-to-create-a-lightweight-performance-monitoring-solution-with-docker-grafana-and-influxdb
-
 ## 데이터 보관
 docker 를 재구동해도 데이터가 로컬 서버에 남아 있도록 분석한 데이터는 서버에 보관됩니다.
 데이터가 저장되는 경로는 서버에서 아래의 명령어를 실행하면 알 수 있습니다.
@@ -68,3 +60,27 @@ docker 를 재구동해도 데이터가 로컬 서버에 남아 있도록 분석
 $ docker volume inspect dockergrafanainfluxkit_grafana_data | grep Mountpoint
 $ docker volume inspect dockergrafanainfluxkit_influxdb_data  | grep Mountpoint
 ```
+
+# nmon 으로 리눅스 모니터링 하기
+
+1) 다운로드 받은 nmon2influxdb 를 전체 시스템에서 사용할 수 있도록 /usr/local/bin 으로 복사하고 실행권한을 부여합니다.
+```
+$ sudo cp nmon2influxdb/nmon2influxdb /usr/local/bin
+$ sudo chmod +x /usr/local/bin/nmon2influxdb
+```
+
+2)nmon 으로 리눅스 시스템 모니터링 데이터를 수집해서 grafana 대시보드로 보기 위해서, 매일 10초 간격으로 nmon 이 모니터링 데이터를 수집할 수 있도록 crontab 에 다음과 같이 설정해 줍니다.
+```
+0 0 * * * /usr/bin/killall nmon && /usr/local/bin/nmon2influxdb import <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/rm -f <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/nmon -f -m <nmon 결과값을 저장할 경로> -s 10 -c 43195
+```
+## 모니터링 화면 예
+
+![Memory](https://github.com/chaeya/DockerGrafanaInfluxKit/blob/master/nmon2influxdb/mem.png)
+![Network](https://github.com/chaeya/DockerGrafanaInfluxKit/blob/master/nmon2influxdb/network.png)
+![Disk](https://github.com/chaeya/DockerGrafanaInfluxKit/blob/master/nmon2influxdb/du.png)
+
+
+
+
+## Link to the related article: 
+https://www.blazemeter.com/blog/how-to-create-a-lightweight-performance-monitoring-solution-with-docker-grafana-and-influxdb
