@@ -14,21 +14,27 @@ Grafana 는 시각화 도구입니다.
 
 # Requirement
 - Ubuntu 16.04 에서 테스트 되었습니다.
-- 시스템에 docker 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/install/linux/docker-ce/ubuntu/]를 참고하세요.
-- docker-compose 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/compose/install/#install-compose]를 참고하세요.
+- 시스템에 docker 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/install/linux/docker-ce/ubuntu/] 를 참고하세요.
+- docker-compose 가 설치되어 있어야 합니다. 없는 경우 링크[https://docs.docker.com/compose/install/#install-compose] 를 참고하세요.
 
 
 # Install and Run
 
 ## 소스코드 다운로드
+```
 git clone https://github.com/chaeya/DockerGrafanaInfluxKit.git
+```
 
 ## 빌드
+```
 cd DockerGrafanaInfluxKit
 docker-compose build
+```
 
 ## 서비스 구동
+```
 docker-compose up -d
+```
 
 ## 접속
 
