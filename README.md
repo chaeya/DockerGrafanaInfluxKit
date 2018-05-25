@@ -63,13 +63,13 @@ $ docker volume inspect dockergrafanainfluxkit_influxdb_data  | grep Mountpoint
 
 # nmon 으로 리눅스 모니터링 하기
 
-1) 다운로드 받은 nmon2influxdb 를 전체 시스템에서 사용할 수 있도록 /usr/local/bin 으로 복사하고 실행권한을 부여합니다.
+#### 다운로드 받은 nmon2influxdb 를 전체 시스템에서 사용할 수 있도록 /usr/local/bin 으로 복사하고 실행권한을 부여합니다.
 ```
 $ sudo cp nmon2influxdb/nmon2influxdb /usr/local/bin
 $ sudo chmod +x /usr/local/bin/nmon2influxdb
 ```
 
-2)nmon 으로 리눅스 시스템 모니터링 데이터를 수집해서 grafana 대시보드로 보기 위해서, 매일 10초 간격으로 nmon 이 모니터링 데이터를 수집할 수 있도록 crontab 에 다음과 같이 설정해 줍니다.
+#### nmon 으로 리눅스 시스템 모니터링 데이터를 수집해서 grafana 대시보드로 보기 위해서, 매일 10초 간격으로 nmon 이 모니터링 데이터를 수집할 수 있도록 crontab 에 다음과 같이 설정해 줍니다.
 ```
 0 0 * * * /usr/bin/killall nmon && /usr/local/bin/nmon2influxdb import <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/rm -f <nmon 결과값을 저장할 경로>/*.nmon && /usr/bin/nmon -f -m <nmon 결과값을 저장할 경로> -s 10 -c 43195
 ```
