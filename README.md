@@ -53,7 +53,7 @@ $ docker-compose up -d
 
 ## 접속
 
-http:<설치한 서버 IP>:3000 으로 접속한 후 admin/admin 으로 로그인 합니다.
+[http:localhost:3000] 으로 접속한 후 admin/admin 으로 로그인 합니다.
 
 ## 데이터 보관
 docker 를 재구동해도 데이터가 로컬 서버에 남아 있도록 분석한 데이터는 서버에 보관됩니다.
