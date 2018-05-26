@@ -23,7 +23,7 @@ nmon 의 결과 파일을 influxDB 로 임포트 할 수 있습니다.
 # Requirement
 - Ubuntu 16.04 에서 테스트 되었습니다.
 - 시스템에 docker 가 필요합니다. 없는 경우 [https://docs.docker.com/install/linux/docker-ce/ubuntu/] 를 참고하세요.
-- docker-compose 가 필요니다. 없는 경우 https://docs.docker.com/compose/install/#install-compose] 를 참고하세요.
+- docker-compose 가 필요니다. 없는 경우 [https://docs.docker.com/compose/install/#install-compose] 를 참고하세요.
 - nmon2influxdb를 사용하기 위해서는 nmon 이 설치되어 있어야 합니다. 
 
 
@@ -53,7 +53,7 @@ $ docker-compose up -d
 
 ## 접속
 
-[http://localhost:3000] 으로 접속한 후 admin/admin 으로 로그인 합니다.
+[http://localhost:3000](http://localhost:3000) 으로 접속한 후 admin/admin 으로 로그인 합니다.
 
 ## 데이터 보관
 docker 를 재구동해도 데이터가 로컬 서버에 남아 있도록 분석한 데이터는 서버에 보관됩니다.
