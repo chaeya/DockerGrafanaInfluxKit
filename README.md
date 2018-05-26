@@ -24,6 +24,7 @@ nmon 의 결과 파일을 influxDB 로 임포트 할 수 있습니다.
 - Ubuntu 16.04 에서 테스트 되었습니다.
 - 시스템에 docker 가 필요합니다. 없는 경우 [https://docs.docker.com/install/linux/docker-ce/ubuntu/] 를 참고하세요.
 - docker-compose 가 필요니다. 없는 경우 [https://docs.docker.com/compose/install/#install-compose] 를 참고하세요.
+- port 3000/tcp, 8086/tcp 를 사용할 수 있어야 합니다. 
 - nmon2influxdb를 사용하기 위해서는 nmon 이 설치되어 있어야 합니다. 
 
 
