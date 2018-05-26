@@ -28,8 +28,8 @@ nmon 의 결과 파일을 influxDB 로 임포트 할 수 있습니다.
 
 
 # Demo
-[http://geecamp.com:3000]
-admin / admin
+- Demo site : [http://demo.invesume.com:3000]
+- Login Account : admin / admin
 
 # Install and Run
 
