@@ -91,6 +91,7 @@ nmon2influxdb dashboard <nmon 결과 파일>
 ## nmon Dashboard 사용
 - 대시보드를 별도로 만들기 어려운 사용자들을 위해서 미리 준비된 대시보드를 제공합니다.
 - grafana 로그인 후 왼쪽의 Create > Import 메뉴를 이용하면 다운받은 소스코드 중 nmon2influxdb/nmonDashboard.json 파일을 grafana 에서 불러와서 사용할 수 있습니다.
+![import dashboard](https://github.com/chaeya/DockerGrafanaInfluxKit/blob/master/nmon2influxdb/import.png)
 
 
 ## 모니터링 화면 예
